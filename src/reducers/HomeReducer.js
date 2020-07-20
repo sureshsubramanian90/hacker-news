@@ -5,7 +5,7 @@ import { arregateHomeData } from '../service/HomeService';
 export default function HomeReducer(state = {}, action = {}) {
   switch (action.type) {
     case GET_HOME_PAGE_DATA_REQUEST_SUCCESS: {
-      const data = action.refresh ? arregateHomeData(state) : arregateHomeData(action.data);
+      const data = action.refresh ? arregateHomeData(state) : action.data;
       return {
         ...data
       };

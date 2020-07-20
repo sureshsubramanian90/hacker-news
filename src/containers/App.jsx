@@ -9,12 +9,16 @@ import { getHomePageData, clientRefreshAction } from '../actions/HomePageAction'
 import { calcDate } from '../helpers/Utils';
 import UpVote from '../components/UpVote/UpVote';
 import Hide from '../components/Hide/Hide';
+import Graph from '../components/Graph/Graph';
 import * as styles from  './App.css';
 
 const cx = classNames.bind(styles);
 class App extends Component {
   constructor() {
     super();
+    this.state  = {
+      showGraph: false
+    }
   }
 
   componentWillMount() {
@@ -48,8 +52,8 @@ class App extends Component {
           </div>
           <div className={cx("tablecell")}>
             {item.title && <span>{item.title} {createdDate}</span>}
-            {item.url && <span>({item.url})</span>}
-            {item.author && <span>by {item.author}</span>}
+            {item.url && <span> ({item.url})</span>}
+            {item.author && <span> by {item.author}</span>}
             <span>
               <Hide id={item.objectID} />
             </span>
@@ -62,6 +66,9 @@ class App extends Component {
   }
   componentDidMount() {
     this.props.actions.clientRefreshAction();
+    this.setState({
+      showGraph: true
+    });
   }
   goToPreviouspage = () => {
     const { data } = this.props;
@@ -91,6 +98,7 @@ class App extends Component {
         <div className={cx("paginationSection")}>
           <button disabled={!data.page} onClick={() => this.goToPreviouspage()}>previous</button> | <button disabled={data.page === data.nbPages} onClick={() => this.goToNextPage()}>next</button>
         </div>
+        {this.state.showGraph && <Graph data={data.graph} />}
       </div>
     );
   }
