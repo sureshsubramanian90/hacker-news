@@ -14,7 +14,7 @@ import StoreFactory from "./redux/storeFactory";
 import compression from 'compression';
 
 const app = Express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 //Serve static files
 app.use(compression({ filter: shouldCompress }))
 
