@@ -65,7 +65,9 @@
     "source-map-explorer": "^2.4.2",
     "webpack": "^4.42.1",
     "webpack-merge": "4.1.1",
-    "webpack-node-externals": "1.7.2"
+    "webpack-node-externals": "1.7.2",
+    "better-npm-run": "^0.1.1",
+    "classnames": "^2.2.6"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
@@ -78,8 +80,6 @@
     "babel-loader": "^8.1.0",
     "babel-minify-webpack-plugin": "^0.3.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "better-npm-run": "^0.1.1",
-    "classnames": "^2.2.6",
     "copy-webpack-plugin": "^4.5.2",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^18.2.0",

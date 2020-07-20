@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import isEmpty from 'lodash/isEmpty';
-// import classNames from 'classnames/bind';
+import classNames from 'classnames/bind';
 import { getHomePageData } from '../actions/HomePageAction';
-// import * as styles from  './App.css';
+import * as styles from  './App.css';
 
-// const cx = classNames.bind(styles);
+const cx = classNames.bind(styles);
 class App extends Component {
   constructor() {
     super();
@@ -24,8 +24,8 @@ class App extends Component {
   render() {
     const { data } = this.props;
     return (
-      <div>
-        <div>Story
+      <div className={cx("mainContainer", "col8")}>
+        <div className={cx("test")}>Story
           </div>
           {data && data.hits && data.hits.map((item) => {
             return (
