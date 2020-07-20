@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 function UpVote (props) {
   const handleVoteEvent = () => {
-    props.hideDataAction({ id: props.id })
+    props.actions.upVoteAction({ id: props.id })
   }
   return (
     <button onClick={() => handleVoteEvent()} className={cx('upVote')}>

@@ -34,7 +34,9 @@ app.use(handleRender);
 
 // We are going to fill these out in the sections to follow
 function handleRender(req, res, next) {
-  const initialState = { context: getApplicationContext() };
+  const initialState = { 
+    context: getApplicationContext(req.query),
+   };
   const store = StoreFactory(RootReducer, initialState, RootSaga);
   match(
     {

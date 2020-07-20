@@ -41,8 +41,11 @@ const setEnvContext = (context) => {
     delete context.environments;
 };
 
-export const getApplicationContext = () => {
+export const getApplicationContext = (query) => {
     const context = mergeCommonToDevice();
     setEnvContext(context);
+    if(query) {
+        context['queryParam'] = query;
+    }
     return context;
 };

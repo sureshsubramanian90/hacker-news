@@ -1,4 +1,4 @@
-import { GET_HOME_PAGE_DATA_REQUEST, HIDE_STORY_REQUEST, UP_VOTE_REQUEST } from '../actionTypes/HomeActionTypes';
+import { GET_HOME_PAGE_DATA_REQUEST, HIDE_STORY_REQUEST, UP_VOTE_REQUEST, GET_HOME_PAGE_DATA_REQUEST_SUCCESS } from '../actionTypes/HomeActionTypes';
 
 export const getHomePageData = (payload) => ({
   type: GET_HOME_PAGE_DATA_REQUEST,
@@ -15,8 +15,14 @@ export const upVoteAction = (payload) => ({
   payload,
 });
 
+export const clientRefreshAction = () => ({
+  type: GET_HOME_PAGE_DATA_REQUEST_SUCCESS,
+  refresh: true,
+});
+
 export default {
   getHomePageData,
-  hideData,
-  upVoteAction
+  hideDataAction,
+  upVoteAction,
+  clientRefreshAction
 };

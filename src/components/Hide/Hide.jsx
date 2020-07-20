@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 function Hide (props) {
   const handleHideEvent = () => {
-    props.hideDataAction({ id: props.id })
+    props.actions.hideDataAction({ id: props.id })
   }
   return (
     <button onClick={() => handleHideEvent()} className={cx('hide')}>

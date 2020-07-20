@@ -11,14 +11,13 @@ import {
   UP_VOTE_REQUEST_ERROR,
   UP_VOTE_REQUEST_SUCCESS
 } from '../actionTypes/HomeActionTypes';
+import LocalStorage from '../helpers/LocalStorage';
 
 function* homeSaga(action) {
   try {
-    console.log('API TRIGGERED');
     const params = action.payload;
     const result = yield call(getData, params);
     if (result.isSuccess) {
-      console.log('API RESULT')
       const data = result.data;
       yield put({ type: GET_HOME_PAGE_DATA_REQUEST_SUCCESS, data });
     } else {
@@ -33,6 +32,11 @@ function* homeSaga(action) {
 function* hideStorySaga(action) {
   try {
     const params = action.payload;
+    let hideItems = LocalStorage.getData('hideData');
+    hideItems = hideItems ? JSON.parse(hideItems) : [];
+    hideItems.push(params.id);
+    LocalStorage.setData('hideData', hideItems);
+    yield put({ type: HIDE_STORY_REQUEST_SUCCESS, id: params.id });
   } catch(err) {
     yield put({ type: HIDE_STORY_REQUEST_ERROR });
   }
@@ -41,6 +45,11 @@ function* hideStorySaga(action) {
 function* upVoteSaga(action) {
   try {
     const params = action.payload;
+    let upVoteItems = LocalStorage.getData('upVoteData');
+    upVoteItems = upVoteItems ? JSON.parse(upVoteItems) : {};
+    upVoteItems[params.id] = upVoteItems[params.id] ? upVoteItems[params.id] += 1 : 1;
+    LocalStorage.setData('upVoteData', upVoteItems);
+    yield put({ type: UP_VOTE_REQUEST_SUCCESS, id: params.id });
   } catch(err) {
     yield put({ type: UP_VOTE_REQUEST_ERROR });
   }

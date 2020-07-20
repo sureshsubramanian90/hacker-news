@@ -1,46 +1,38 @@
 import createSagaMiddleware from 'redux-saga';
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
-import reducerFactory, { bootReducers } from './reducerFactory';
-import reducerRegistryMiddleware from './reducerSagaRegistryMiddleware';
-import reducerSagaRegistry from './ReducerSagaRegistry';
+import { createStore, compose, applyMiddleware } from 'redux';
+import reducerFactory from './reducerFactory';
 
 let store = {};
 let sagaMiddleware;
-const storeFactory = (reducers, initialState, rootSaga, externalMiddlewares) => {
+const storeFactory = (reducers, initialState, rootSaga) => {
     sagaMiddleware = createSagaMiddleware();
-    let middleware = [sagaMiddleware, reducerRegistryMiddleware];
-    if (externalMiddlewares) {
-        middleware = [...middleware, ...externalMiddlewares];
-    }
-
+    console.log('INITIALSTATE', initialState)
     store = createStore(
         reducerFactory(reducers),
         initialState,
-        compose(applyMiddleware(...middleware)),
+        compose(applyMiddleware(sagaMiddleware)),
     );
-
-    store.initialReducers = reducers;
     store.tasks = rootSaga ? [sagaMiddleware.run(rootSaga)] : [];
 
-    reducerSagaRegistry.reset();
+    // reducerSagaRegistry.reset();
 
-    reducerSagaRegistry.initReducers({
-        ...bootReducers,
-        ...store.initialReducers,
-    }, asyncReducers => store.replaceReducer(combineReducers(asyncReducers)));
+    // reducerSagaRegistry.initReducers({
+    //     ...bootReducers,
+    //     ...store.initialReducers,
+    // }, asyncReducers => store.replaceReducer(combineReducers(asyncReducers)));
 
-    reducerSagaRegistry.initSagas(
-        rootSaga.injectedSagas,
-        (asyncSaga) => {
-            let task = null;
-            if (asyncSaga) {
-                task = sagaMiddleware.run(asyncSaga);
-                store.tasks = [...store.tasks, task];
-            }
-            return task;
-        },
-        sagaTask => sagaTask && sagaTask.cancel(),
-    );
+    // reducerSagaRegistry.initSagas(
+    //     rootSaga.injectedSagas,
+    //     (asyncSaga) => {
+    //         let task = null;
+    //         if (asyncSaga) {
+    //             task = sagaMiddleware.run(asyncSaga);
+    //             store.tasks = [...store.tasks, task];
+    //         }
+    //         return task;
+    //     },
+    //     sagaTask => sagaTask && sagaTask.cancel(),
+    // );
     return store;
 };
 
