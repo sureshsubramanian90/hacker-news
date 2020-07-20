@@ -1,0 +1,9 @@
+
+build/*
+coverage/*
+node_modules/*
+webpack/README.md
+.gradle/
+package-lock.json
+.node-version
+public/*
