@@ -5,7 +5,6 @@ const MinifyPlugin = require("babel-minify-webpack-plugin");
 const CompressionPlugin = require('compression-webpack-plugin');
 
 const buildMode = process.env.NODE_ENV;
-console.log('RUNNING MODE:', buildMode, __dirname);
 const isDev = (buildMode === 'development');
 
 const webPackPlugins = [

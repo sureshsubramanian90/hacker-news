@@ -5,9 +5,7 @@ const baseConfig = require('./webpack.base');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-console.log('********************PATH', path);
 const buildMode = process.env.NODE_ENV;
-console.log('RUNNING MODE:', buildMode, __dirname);
 const isDev = (buildMode === 'development');
 
 const webPackPlugins = [

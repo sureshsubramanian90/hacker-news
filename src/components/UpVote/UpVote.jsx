@@ -3,15 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classNames from 'classnames/bind';
-import { getHomePageData } from '../../actions/HomePageAction';
+import { upVoteAction } from '../../actions/HomePageAction';
 import * as styles from  './UpVote.css';
 
 const cx = classNames.bind(styles);
 
 function UpVote (props) {
-  console.log('Props', props);
+  const handleVoteEvent = () => {
+    props.hideDataAction({ id: props.id })
+  }
   return (
-    <button className={cx('upVote')}>
+    <button onClick={() => handleVoteEvent()} className={cx('upVote')}>
       UpVote
     </button>
   )
@@ -19,7 +21,7 @@ function UpVote (props) {
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
-    {getHomePageData},
+    { upVoteAction },
     dispatch,
   ),
 });

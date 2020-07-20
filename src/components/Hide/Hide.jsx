@@ -3,14 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import classNames from 'classnames/bind';
-import { getHomePageData } from '../../actions/HomePageAction';
+import { hideDataAction } from '../../actions/HomePageAction';
 import * as styles from  './Hide.css';
 
 const cx = classNames.bind(styles);
 
 function Hide (props) {
+  const handleHideEvent = () => {
+    props.hideDataAction({ id: props.id })
+  }
   return (
-    <button className={cx('hide')}>
+    <button onClick={() => handleHideEvent()} className={cx('hide')}>
       Hide
     </button>
   )
@@ -18,7 +21,7 @@ function Hide (props) {
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
-    {getHomePageData},
+    { hideDataAction },
     dispatch,
   ),
 });
