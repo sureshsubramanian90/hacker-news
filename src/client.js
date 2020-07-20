@@ -5,12 +5,21 @@ import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import store from './store';
-import App from './containers/App';
+import App from './containers/App'
+
+const routing = (
+  <Router>
+    <div>
+      <Route exact path="/" component={App} />
+    </div>
+  </Router>
+)
 
 ReactDOM.hydrate(
   <Provider store={store}>
-      <App />
+      {routing}
   </Provider>,
   document.querySelector('#root')
 );
