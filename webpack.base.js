@@ -18,6 +18,10 @@ const webPackPlugins = [
     {
       from: './src/assets/images',
       to: ``
+    },
+    {
+      from: './robots.txt',
+      to: ``
     }
   ]),
   new MinifyPlugin(),

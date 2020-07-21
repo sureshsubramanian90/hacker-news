@@ -1,0 +1,4 @@
+# robots.txt file for http://hacker-news-react-express.herokuapp.com/
+ 
+User-agent: *
+Allow: /
