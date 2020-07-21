@@ -9,7 +9,7 @@ import { getHomePageData, clientRefreshAction } from '../actions/HomePageAction'
 import { calcDate } from '../helpers/Utils';
 import UpVote from '../components/UpVote/UpVote';
 import Hide from '../components/Hide/Hide';
-import Graph from '../components/Graph/Graph';
+// import Graph from '../components/Graph/Graph';
 import * as styles from  './App.css';
 
 const cx = classNames.bind(styles);
@@ -110,7 +110,7 @@ class App extends Component {
         <div className={cx("paginationSection", "desktopPagination")}>
           <button className={cx('paginationBtn')} disabled={!data.page} onClick={() => this.goToPreviouspage()}>Previous</button> | <button className={cx('paginationBtn')} disabled={data.page === data.nbPages} onClick={() => this.goToNextPage()}>Next</button>
         </div>
-        {this.state.showGraph ? <Graph data={data.graph} /> : null}
+        {/* {this.state.showGraph ? <Graph data={data.graph} /> : null} */}
       </div>
     );
   }
