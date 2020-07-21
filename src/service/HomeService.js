@@ -1,6 +1,6 @@
 import LocalStorage from '../helpers/LocalStorage';
 
-export const arregateHomeData = (data) => {
+export const arregateHomeData = (data, upVoteId) => {
     let hideItems = LocalStorage.getData('hideData');
     hideItems = hideItems ? JSON.parse(hideItems) : [];
     let upVoteItems = LocalStorage.getData('upVoteData');
@@ -11,12 +11,14 @@ export const arregateHomeData = (data) => {
             if (hideItems && hideItems.indexOf(data.hits[i].objectID) != -1) {
                 data.hits[i].hide = true;
             }
-            if (upVoteItems[data.hits[i].objectID]) {
+            if (upVoteItems[data.hits[i].objectID] && !upVoteId) {
                 data.hits[i].points += upVoteItems[data.hits[i].objectID];
+            } else if (upVoteId && (upVoteId === data.hits[i].objectID)) {
+                data.hits[i].points += 1;
             }
             data.graph.push({
                 x: i,
-                y: data.hits[i].num_comments || 1,
+                y: data.hits[i].points || 1,
             })
         }
     }

@@ -1,0 +1,19 @@
+.upVote {
+    display: block;
+    margin: 0 auto;
+    height: 100%;
+    width: 56px;
+    min-height: 20px;
+    outline: none;
+    cursor: pointer;
+}
+.upArrow {
+    width: 0px;
+    height: 0px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;    
+    border-bottom: 8px solid #a2a2a2;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+}

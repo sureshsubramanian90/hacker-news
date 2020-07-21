@@ -13,8 +13,8 @@ function UpVote (props) {
     props.actions.upVoteAction({ id: props.id })
   }
   return (
-    <button onClick={() => handleVoteEvent()} className={cx('upVote')}>
-      UpVote
+    <button aria-label="vote" onClick={() => handleVoteEvent()} className={cx('upVote')}>
+      <span className={cx("upArrow")} />
     </button>
   )
 }

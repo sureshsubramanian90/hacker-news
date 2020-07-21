@@ -27,7 +27,6 @@ class App extends Component {
       this.props.actions.getHomePageData({ page });
     }
   }
-
   renderStoryRow = (item, currentDate) => {
     if(!item.hide) {
       const date = new Date(item.created_at);
@@ -44,19 +43,28 @@ class App extends Component {
       }
       
       return (
-        <div className={cx("tableHead")} key={item.objectID}>
-          <div className={cx("tablecell")}>{item.num_comments || '-'}</div>
-          <div className={cx("tablecell")}>{item.points || '-'}</div>
-          <div className={cx("tablecell")}>
+        <div className={cx("tableBody")} key={item.objectID}>
+          <div className={cx("tablecell", "w68", "commentsCell", "hideMob")}>{item.num_comments || '-'}</div>
+          <div className={cx("tablecell", "w68", "pointsCell", "hideMob")}>{item.points || '-'}</div>
+          <div className={cx("tablecell", "w56", "upvoteCell", "hideMob")}>
             <UpVote id={item.objectID}/>
           </div>
-          <div className={cx("tablecell")}>
-            {item.title && <span>{item.title} {createdDate}</span>}
-            {item.url && <span> ({item.url})</span>}
-            {item.author && <span> by {item.author}</span>}
-            <span>
-              <Hide id={item.objectID} />
+          <div className={cx("tablecell", "newsDetails")}>
+            {item.title && <span className={cx('title')}>{item.title}</span>}
+            {item.url && <span className={cx('url')}> ({item.url})</span>}
+            {item.author && <span className={cx('author')}> <span>by </span><span className={cx('authorName')}>{item.author}</span></span>}
+            <span className={cx('url')}> {createdDate}</span>
+            <span className={cx('hideBtn')}>
+              [<Hide id={item.objectID} />]
             </span>
+          </div>
+          <div className={cx("tablecell", "w68", "commentsCell", "showMob")}>{item.num_comments || '-'}</div>
+          <div className={cx("tablecell", "w68", "pointsCell", "showMob")}>{item.points || '-'}</div>
+          <div className={cx("tablecell", "w56", "upvoteCell", "showMob")}>
+            <UpVote id={item.objectID}/>
+          </div>
+          <div className={cx('hideBtnMbl')}>
+            [<Hide id={item.objectID} />]
           </div>
         </div>
       )
@@ -66,9 +74,12 @@ class App extends Component {
   }
   componentDidMount() {
     this.props.actions.clientRefreshAction();
-    this.setState({
-      showGraph: true
-    });
+    const { queryParam: { disableGraph } } = this.props.context;
+    if (!disableGraph) {
+      this.setState({
+        showGraph: true
+      });
+    }
   }
   goToPreviouspage = () => {
     const { data } = this.props;
@@ -84,21 +95,22 @@ class App extends Component {
     const { data } = this.props;
     const currentDate = new Date();
     return (
-      <div className={cx("mainContainer", "col8")}>
-        <div className={cx("test")}>Story</div>
+      <div className={cx("mainContainer")}>
         <div className={cx("tableContainer")}>
           <div className={cx("tableHead")}>
-            <div className={cx("tablecell")}>Comments</div>
-            <div className={cx("tablecell")}>Vote Count</div>
-            <div className={cx("tablecell")}>Up Vote</div>
-            <div className={cx("tablecell")}>News details</div>
+            <div className={cx("tablecell", "w68")}>Comments</div>
+            <div className={cx("tablecell", "w68")}>Vote Count</div>
+            <div className={cx("tablecell", "w56")}>Up Vote</div>
+            <div className={cx("tablecell", "newsDetailsHead")}>News details</div>
           </div>
+        </div>
+        <div className={cx("tableContainer")}>
           {data && data.hits && data.hits.map((item) => this.renderStoryRow(item, currentDate))}
         </div>
-        <div className={cx("paginationSection")}>
-          <button disabled={!data.page} onClick={() => this.goToPreviouspage()}>previous</button> | <button disabled={data.page === data.nbPages} onClick={() => this.goToNextPage()}>next</button>
+        <div className={cx("paginationSection", "desktopPagination")}>
+          <button className={cx('paginationBtn')} disabled={!data.page} onClick={() => this.goToPreviouspage()}>Previous</button> | <button className={cx('paginationBtn')} disabled={data.page === data.nbPages} onClick={() => this.goToNextPage()}>Next</button>
         </div>
-        {this.state.showGraph && <Graph data={data.graph} />}
+        {this.state.showGraph ? <Graph data={data.graph} /> : null}
       </div>
     );
   }

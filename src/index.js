@@ -80,6 +80,7 @@ function renderFullPage(html, store) {
     </Provider>
   );
   return `
+  <!DOCTYPE html>
     <html lang="en">
       <head>
         <meta name="Description" content="React SSR Boilerplate">
@@ -93,6 +94,7 @@ function renderFullPage(html, store) {
         />
         <link rel="shortcut icon" href="favicon.ico" />
         <title>React Server Side</title>
+        <link rel="stylesheet" href="css/main.css" />
       </head>
       <body>
         <div id="root">${ele}</div>
@@ -105,7 +107,6 @@ function renderFullPage(html, store) {
           )}
         </script>
         <script src="bundle.js"></script>
-        <link rel="stylesheet" href="css/main.css" />
       </body>
     </html>
     `;

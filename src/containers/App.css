@@ -1,14 +1,225 @@
+body{
+    margin: 0;
+}
+.showMob{
+    display: none;
+}
 .mainContainer{
     max-width: 1216px;
-    margin: 0 auto  ;
+    margin: 0 auto;
+    font: normal 14px/20px arial, helvetica, sans-serif;
+    
+    button {
+        background: none;
+        border: 0;
+        box-shadow: none;
+        outline: none;
+        cursor: pointer;
+    }
+    .mobPagination{
+        display: none;
+    }
+    .w68 {
+        width: 68px;
+    }
+    .w56 {
+        width: 56px;
+    }
+
+    .newsDetails {
+        width: calc(100% - 192px);
+    }
+
     & .tableContainer{
        display: table;
        width: 100%;
-       & .tableHead{
+       background: #F5F5EF;
+       & .tableBody:nth-child(even) {
+            background: #E5E5DE;
+        }
+       & .tableHead, & .tableBody{
            display: table-row;
+        
            & .tablecell{
                display: table-cell;
+               text-align: center;
+               padding: 2px;
+               padding-right: 8px;
+
+               &.newsDetails {
+                   text-align: left;
+               }
+               &.showMob{
+                   display: none;
+               }
            }
        }
+        & .tableHead {
+           background: #ff6700;
+           color: #FFF;
+           font-weight: bold;
+
+           & .tableCell {
+               vertical-align: bottom;
+           }
+       }
+    }
+}
+
+.tablebody:nth-child(even) {
+    background: #f2f2f2;
+}
+
+.newsDetails {
+    .title {
+        font-size: 14px;
+    }
+
+    .url, .author, .hideBtn {
+        font-size: 12px;
+        color: #a2a2a2;
+    }
+
+    .authorName {
+        color: #000;
+    }
+
+    .hideBtn {
+        margin-left: 4px;
+    }
+}
+
+.paginationSection {
+    float: right;
+    font-weight: bold;
+    color: #ff6700;
+}
+
+.paginationBtn {
+    font-weight: bold;
+    color: #ff6700;
+}
+.paginationBtn:disabled {
+    opacity: 0.75;
+}
+
+.hideBtnMbl {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .mainContainer {
+        .mobPagination{
+            display: block;
+        }
+        .tableContainer {
+            display: block;
+            background: none;
+            .hideBtn {
+                display: none;
+            }
+            .tableHead .tablecell.w68 {
+                display: none;
+            }
+            .tableHead .tablecell.w56 {
+                display: none;
+            }
+            .hideBtnMbl {
+                display: block;
+            }
+
+            .tableBody {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                border-bottom: 1px solid #a59c9c;
+                padding: 10px;
+                .tableCell {
+                    padding-top: 16px;
+                    text-align: left;
+                }
+            }
+
+            .newsDetails {
+                flex: 1 100%;
+                width: 100%;
+            }
+            .hideBtnMbl{
+                width: 23%;
+                text-align: left;
+                position: relative;
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    top: 2px;
+                    font-size: 10px;
+                    color: #a2a2a2;
+                    left: 4px;
+                }
+            }
+            .tablecell{
+                width: 23%;
+                text-align: left;
+                position: relative;
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    top: 2px;
+                    font-size: 13px;
+                    color: #a2a2a2;
+                    left: 4%;
+                }
+                &.commentsCell{
+                    width: 26%;
+                    text-align: left;
+                }
+                &.hideMob{
+                    display: none;
+                }
+                &.showMob{
+                    display: block !important;
+                }
+                &.commentsCell:before {
+                    content: 'Comments';
+                    left: 28%;
+                }
+                &.pointsCell{
+                    text-align: left;
+                }
+                &.pointsCell:before {
+                    content: 'Points';
+                    left: 43%
+                }
+
+                &.upvoteCell {
+                    .upVote {
+                        text-align: left;
+                        margin: 0
+                    }
+                }
+
+                &.upvoteCell:before {
+                    content: 'Upvote';
+                    left: 26%
+                }
+
+                /* &.newsDetails::before {
+                    content: "News Details";
+                } */
+            }
+
+            .hideBtnMbl {
+                order: 4;
+                width: 18%;
+            }
+        }
+    }
+    .showMob{
+        display: block;
+    }
+    .hideMob{
+        display: none;
     }
 }

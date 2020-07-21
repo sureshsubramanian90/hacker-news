@@ -1,6 +1,9 @@
 const ExtractCssChunks = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
+
 
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -18,11 +21,8 @@ const webPackPlugins = [
     }
   ]),
   new MinifyPlugin(),
-  new CompressionPlugin()
+  new CompressionPlugin(),
 ];
-// !isDev && webPackPlugins.push(new CompressionPlugin({
-//     test: /\.(js|jsx)$|\.css$|\.html$/,
-//   }))
 module.exports = {
   // Tell webpack to run babel on every file it runs through
   module: {
@@ -50,4 +50,20 @@ module.exports = {
     ]
   },
   plugins: webPackPlugins,
+  optimization: {
+    minimizer: [
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                output: {
+                    comments: false
+                },
+                minify: {},
+                compress: {
+                    booleans: true,
+                    //...
+                }
+            }
+        }),
+    ]
+  },
 };
