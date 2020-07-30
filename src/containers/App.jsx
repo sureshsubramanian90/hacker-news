@@ -24,7 +24,7 @@ class App extends Component {
 
   componentWillMount() {
     if (isEmpty(this.props.data)) {
-      const page = get(this.props, 'context.queryParam.page', false);
+      const page = get(this.props, 'context.queryParam.page', 0);
       this.props.actions.getHomePageData({ page });
     }
   }
@@ -109,7 +109,7 @@ class App extends Component {
           {data && data.hits && data.hits.map((item) => this.renderStoryRow(item, currentDate))}
         </div>
         <div className={cx("paginationSection", "desktopPagination")}>
-          <button className={cx('paginationBtn', 'paginationBtnPrevious')} disabled={!data.page} onClick={() => this.goToPreviouspage()}>Previous</button> | <button className={cx('paginationBtn', 'paginationBtnNext')} disabled={data.page === data.nbPages} onClick={() => this.goToNextPage()}>Next</button>
+          <button className={cx('paginationBtn', 'paginationBtnPrevious')} disabled={!data.page} onClick={() => this.goToPreviouspage()}>Previous</button> | <button className={cx('paginationBtn', 'paginationBtn')} disabled={data.page === data.nbPages} onClick={() => this.goToNextPage()}>Next</button>
         </div>
         {this.state.showGraph ? <Graph data={data.graph} /> : null}
       </div>
