@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import isEmpty from 'lodash/isEmpty';
+import get from 'lodash/get';
 import classNames from 'classnames/bind';
 import { browserHistory } from 'react-router';
 import { getHomePageData, clientRefreshAction } from '../actions/HomePageAction';
@@ -23,7 +24,7 @@ class App extends Component {
 
   componentWillMount() {
     if (isEmpty(this.props.data)) {
-      const { queryParam: { page } } = this.props.context;
+      const page = get(this.props, 'context.queryParam.page', false);
       this.props.actions.getHomePageData({ page });
     }
   }
@@ -74,7 +75,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.props.actions.clientRefreshAction();
-    const { queryParam: { disableGraph } } = this.props.context;
+    const disableGraph = get(this.props, 'context.queryParam.disableGraph', false);
     if (!disableGraph) {
       this.setState({
         showGraph: true
@@ -108,7 +109,7 @@ class App extends Component {
           {data && data.hits && data.hits.map((item) => this.renderStoryRow(item, currentDate))}
         </div>
         <div className={cx("paginationSection", "desktopPagination")}>
-          <button className={cx('paginationBtn')} disabled={!data.page} onClick={() => this.goToPreviouspage()}>Previous</button> | <button className={cx('paginationBtn')} disabled={data.page === data.nbPages} onClick={() => this.goToNextPage()}>Next</button>
+          <button className={cx('paginationBtn', 'paginationBtnPrevious')} disabled={!data.page} onClick={() => this.goToPreviouspage()}>Previous</button> | <button className={cx('paginationBtn', 'paginationBtnNext')} disabled={data.page === data.nbPages} onClick={() => this.goToNextPage()}>Next</button>
         </div>
         {this.state.showGraph ? <Graph data={data.graph} /> : null}
       </div>
