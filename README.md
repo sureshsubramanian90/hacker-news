@@ -1,8 +1,3 @@
-| Name | Required | Description |
-| :--- |:---------:| :----------|
-| client_id | yes | $1600 |
-| client_secret | yes |   $12 |
-| refresh_interval | no |    $1 |
 # Hacker News - Sample
 
 ## Technologies
