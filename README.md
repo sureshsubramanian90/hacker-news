@@ -1,8 +1,8 @@
-| Left-Aligned  | Center Aligned  | Right Aligned |
-| :------------ |:---------------:| -----:|
-| col 3 is      | some wordy text | $1600 |
-| col 2 is      | centered        |   $12 |
-| zebra stripes | are neat        |    $1 |
+| Name | Required | Description |
+| :---: |:---------:| :----------:|
+| client_id | yes | $1600 |
+| client_secret | yes |   $12 |
+| refresh_interval | no |    $1 |
 # Hacker News - Sample
 
 ## Technologies
