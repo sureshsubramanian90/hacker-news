@@ -1,8 +1,7 @@
 
 | Left-Aligned  | Center Aligned  | Right Aligned |
 | :------------ |:---------------:| -----:|
-| col 3 is      | some wordy text
-test| $1600 |
+| col 3 is      | <ul><li>some wordy text</li><li>test</li>| $1600 |
 | col 2 is      | centered        |   $12 |
 | zebra stripes | are neat        |    $1 |
 # Hacker News - Sample
